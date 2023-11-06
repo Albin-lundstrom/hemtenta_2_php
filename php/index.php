@@ -10,6 +10,9 @@
     <!-- <srcipt src="./js/app.js" defer></sricpt> -->
 </head>
 <body>
+    <?php
+        import
+    ?>
     <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
         <div class="p-2 bd-highlight">
             <h3 class="">
