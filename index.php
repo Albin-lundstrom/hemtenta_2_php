@@ -15,11 +15,16 @@
         table{
             margin:  1%;
         }
+        img{
+            min-height: 20vh;
+            height: 100%;
+            width: auto;
+        }
     </style>
 </head>
 <body>
-    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center text-center">
-        <div class="p-2 bd-highlight d-flex flex-column">
+    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center text-center container">
+        <div class="p-2 bd-highlight d-flex flex-column container">
             <h3 class="">
                 <u>Lägg till produkt</u>
             </h3>
@@ -57,7 +62,7 @@
             </button>
         </form>
         </div>
-        <div class="p-2 bd-highlight">
+        <div class="p-2 bd-highlight container">
             <h3>
                 <u>Ändra pris/bild på produkt</u>
             </h3>
@@ -80,7 +85,7 @@
                 ?>
             </div>
         </div>
-        <div class="p-2 bd-highlight">
+        <div class="p-2 bd-highlight container">
             <h3>
                 <u>Ta bort produkt</u>
             </h3>

@@ -22,7 +22,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <td><?= htmlspecialchars($row['description']) ?></td>
     <td><?= htmlspecialchars($row['price']) ?></td>
     <td>
-        <img src="img/<?= htmlspecialchars($row['image']) ?>" alt=<?= htmlspecialchars($row['image'])?> >
+        <div>
+            <img src="img/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['image'])?>" class="img-fluid" >
+        </div>
     </td>
   </tr>
   <?php endforeach ?>
