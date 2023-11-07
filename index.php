@@ -12,6 +12,9 @@
         input{
             margin: 1%;
         }
+        table{
+            margin:  1%;
+        }
     </style>
 </head>
 <body>
@@ -21,11 +24,11 @@
                 <u>Lägg till produkt</u>
             </h3>
             <div class="container">
-                <form action="" method="POST" class="d-flex flex-column mb-3">
+                <form action="" method="POST" class="d-flex flex-column mb-3" enctype="multipart/form-data">
                     <input type="text" placeholder="Name" class="form-control" name="name">
                     <input type="text" placeholder="Description" class="form-control" name="desc">
                     <input type="number" placeholder="Price" class="form-control" name="price">
-                    <input type="file" class="form-control" name="img-link">
+                    <input type="file" class="form-control" name="img">
                     <button class="btn btn-danger" name="add">
                         Skapa produkten
                     </button>
@@ -34,7 +37,8 @@
                     $name = $_POST['name'];
                     $desc = $_POST['desc'];
                     $price = $_POST['price'];
-                    $img = $_POST['img-link'];
+                    $img = $_FILES['img']['name'];
+                    echo $_FILES['img']['tmp_name'];
                     if ( isset($_POST['add'])){
                         include 'functioner/insert.php';
                     }
@@ -45,25 +49,36 @@
             <h3>
                 <u>Se alla produkter</u>
             </h3>
-            <form action="">
-                <button class="btn btn-danger">
-                    Se alla produkter
-                </button>
-            </form>
+            <?php
+                include 'functioner/view.php';
+            ?>
+        <form action="" method="POST">
+            <button class="btn btn-danger">
+                Uppdate List
+            </button>
+        </form>
         </div>
         <div class="p-2 bd-highlight">
             <h3>
                 <u>Ändra pris/bild på produkt</u>
             </h3>
             <div class="container">
-                <form action="" class="d-flex flex-column mb-3">
-                    <input type="text" placeholder="Skriv id för produkt" class="form-control">
-                    <input type="text" placeholder="Price" class="form-control">
-                    <input type="text" placeholder="Image Link" class="form-control">
-                    <button class="btn btn-danger">
+                <form action="" class="d-flex flex-column mb-3" method="POST">
+                    <input type="number" placeholder="Skriv id för produkt" class="form-control" name="upp">
+                    <input type="number" placeholder="Price" class="form-control" name="new-price">
+                    <input type="file" placeholder="Image Link" class="form-control" name="new-image">
+                    <button class="btn btn-danger" name="upp-num">
                         Ändra informationen
                     </button>
                 </form>
+                <?php
+                    $id = $_POST['upp'];
+                    $newPrice = $_POST['new-price'];
+                    $newImage = $_POST['new-image'];
+                    if ( isset($_POST['upp-num'])){
+                        include 'functioner/uppdate.php';
+                    } 
+                ?>
             </div>
         </div>
         <div class="p-2 bd-highlight">
@@ -71,12 +86,18 @@
                 <u>Ta bort produkt</u>
             </h3>
             <div class="container">
-                <form action="" class="d-flex flex-column mb-3">
-                    <input type="text" placeholder="Skriv id för produkt" class="form-control">
-                    <button class="btn btn-danger">
+                <form action="" class="d-flex flex-column mb-3" method="POST">
+                    <input type="number" placeholder="Skriv id för produkt" class="form-control" name="id">
+                    <button class="btn btn-danger" name="id-num">
                         Ta bort produkten
                     </button>
                 </form>
+                <?php
+                    $id = $_POST['id'];
+                    if ( isset($_POST['id-num'])){
+                        include 'functioner/delete.php';
+                    } 
+                ?>
             </div>
         </div>
     </div>
