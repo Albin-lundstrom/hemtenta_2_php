@@ -38,7 +38,6 @@
                     $desc = $_POST['desc'];
                     $price = $_POST['price'];
                     $img = $_FILES['img']['name'];
-                    echo $_FILES['img']['tmp_name'];
                     if ( isset($_POST['add'])){
                         include 'functioner/insert.php';
                     }
