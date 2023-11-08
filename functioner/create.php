@@ -1,5 +1,4 @@
 <?php
-
   // Check for the image
 if(isset($_FILES['img'])){
     // Uppload the image to the img folder
