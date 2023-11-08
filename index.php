@@ -20,6 +20,12 @@
             max-height: 40vh;
             width: auto;
         }
+        #uppdate-btn{
+            width: 100%;
+        }
+        /* #hide{ */
+            /* display: none; */
+        /* } */
     </style>
 </head>
 <body>
@@ -60,19 +66,19 @@
             </div>
         </div>
             <!-- Show product div -->
-        <div class="p-2 bd-highlight">
+        <div class="p-2 bd-highlight" id="view-div">
             <h3>
                 <u>See all products</u>
             </h3>
+            <form action="" method="POST">
+                <button class="btn btn-danger" id="uppdate-btn">
+                    Uppdate List
+                </button>
+            </form>
                 <!-- Php code to include the view file -->
             <?php
                 include 'functioner/view.php';
             ?>
-        <form action="" method="POST">
-            <button class="btn btn-danger">
-                Uppdate List
-            </button>
-        </form>
         </div>
             <!-- Uppdate price and image off a product -->
         <div class="p-2 bd-highlight container">
@@ -86,6 +92,7 @@
                     <input type="number" placeholder="Write the id of the product" class="form-control" name="upp" required>
                     <input type="number" placeholder="Price" class="form-control" name="new-price">
                     <input type="file" placeholder="Image Link" class="form-control" name="new-image">
+                    <input type="text" readonly value="Remember to write ID number." class="form-control text-center"></button>
                     <button class="btn btn-danger" name="upp-num">
                         Uppdate information
                     </button>
@@ -98,28 +105,6 @@
                         // Check for a post from the button and then include the file
                     if ( isset($_POST['upp-num'])){
                         include 'functioner/uppdate.php';
-                    } 
-                ?>
-            </div>
-        </div>
-            <!-- Delete product file -->
-        <div class="p-2 bd-highlight container">
-            <h3>
-                <u>Delete a product</u>
-            </h3>
-            <div class="container">
-                <form action="" class="d-flex flex-column mb-3" method="POST">
-                    <input type="number" placeholder="Write id of product" class="form-control" name="id" required>
-                    <button class="btn btn-danger" name="id-num">
-                        Delete
-                    </button>
-                </form>
-                    <!-- Php code to get variable and include the delete file -->
-                <?php
-                    $id = $_POST['id'];
-                        // Check for a post from the button and then include the file
-                    if ( isset($_POST['id-num'])){
-                        include 'functioner/delete.php';
                     } 
                 ?>
             </div>

@@ -31,7 +31,24 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <img src="img/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['image'])?>" class="img-fluid" >
             </div>
         </td>
+        <td>
+                <!-- form to get POST method -->
+            <form action="" method="POST">
+                    <!-- Button to delete -->
+                        <!-- Value is the id number -->
+                <button type="submit" class="btn btn-danger" value="<?= htmlspecialchars($row['id']) ?>" name="del" id="del-btn">
+                    Delete
+                </button>
+            </form>
+        </td>
     </tr>
         <!-- Ends the foreach -->
     <?php endforeach ?>
+        <!-- Delete button in the view function -->
+    <?php 
+        $id = $_POST['del'];
+        if ( isset($_POST['del'])){
+            include 'functioner/delete.php';
+        } 
+    ?>
 </table>
