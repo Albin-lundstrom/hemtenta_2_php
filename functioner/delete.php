@@ -1,4 +1,5 @@
 <?php
+    // include the config.php file to get connected to the Database
 include 'functioner/config.php';
 
 

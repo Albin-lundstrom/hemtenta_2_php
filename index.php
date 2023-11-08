@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hemtenta_2</title>
-    <link rel="stylesheet" href="css/style.css">
+        <!-- Bootstrap with that css doesn't uppdate -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/bootstrap.min.js" defer></script>
-    <!-- <srcipt src="./js/app.js" defer></sricpt> -->
+        <!-- Inline Style with that extrenal CSS doen't uppdate -->
     <style>
         input{
             margin: 1%;
@@ -16,43 +16,55 @@
             margin:  1%;
         }
         img{
-            min-height: 20vh;
-            height: 100%;
+            min-height: 8vh;
+            max-height: 40vh;
             width: auto;
         }
     </style>
 </head>
 <body>
+    <!-- Main Body Div for flex with bootstrap classes-->
     <div class="d-flex flex-row bd-highlight mb-3 justify-content-center text-center container">
+        <!-- Add Products div -->
         <div class="p-2 bd-highlight d-flex flex-column container">
             <h3 class="">
-                <u>Lägg till produkt</u>
+                <u>Add a product</u>
             </h3>
             <div class="container">
+                    <!-- Form for createing a product -->
+                        <!-- Enctype for image files -->
                 <form action="" method="POST" class="d-flex flex-column mb-3" enctype="multipart/form-data">
-                    <input type="text" placeholder="Name" class="form-control" name="name">
-                    <input type="text" placeholder="Description" class="form-control" name="desc">
-                    <input type="number" placeholder="Price" class="form-control" name="price">
-                    <input type="file" class="form-control" name="img">
+                    <input type="text" placeholder="Name" class="form-control" name="name" required>
+                    <input type="text" placeholder="Description" class="form-control" name="desc" required>
+                    <input type="number" placeholder="Price" class="form-control" name="price" required>
+                    <input type="file" class="form-control" name="img" accept="image/*" required>
                     <button class="btn btn-danger" name="add">
-                        Skapa produkten
+                        Create Product
                     </button>
                 </form>
+                    <!-- php code to get variable of the form and include the create file-->
                 <?php 
                     $name = $_POST['name'];
                     $desc = $_POST['desc'];
                     $price = $_POST['price'];
                     $img = $_FILES['img']['name'];
-                    if ( isset($_POST['add'])){
-                        include 'functioner/insert.php';
+                        // Check for a post from the button and then include the file
+                    if( isset($_POST['add'])){
+                        if($name == "" || $desc == "" || $price == "" || $img == ""){
+                            echo "Form can't be empty";
+                        }else{
+                            include 'functioner/create.php';
+                        }
                     }
                 ?>
             </div>
         </div>
+            <!-- Show product div -->
         <div class="p-2 bd-highlight">
             <h3>
-                <u>Se alla produkter</u>
+                <u>See all products</u>
             </h3>
+                <!-- Php code to include the view file -->
             <?php
                 include 'functioner/view.php';
             ?>
@@ -62,42 +74,50 @@
             </button>
         </form>
         </div>
+            <!-- Uppdate price and image off a product -->
         <div class="p-2 bd-highlight container">
             <h3>
-                <u>Ändra pris/bild på produkt</u>
+                <u>Uppdate the price and image</u>
             </h3>
             <div class="container">
-                <form action="" class="d-flex flex-column mb-3" method="POST">
-                    <input type="number" placeholder="Skriv id för produkt" class="form-control" name="upp">
+                <!-- Form for uppdateing a product -->
+                    <!-- Enctype for image files -->
+                <form action="" class="d-flex flex-column mb-3" method="POST" enctype="multipart/form-data">
+                    <input type="number" placeholder="Write the id of the product" class="form-control" name="upp" required>
                     <input type="number" placeholder="Price" class="form-control" name="new-price">
                     <input type="file" placeholder="Image Link" class="form-control" name="new-image">
                     <button class="btn btn-danger" name="upp-num">
-                        Ändra informationen
+                        Uppdate information
                     </button>
                 </form>
+                    <!-- php code to get variable of the form and include the uppdate file-->
                 <?php
                     $id = $_POST['upp'];
                     $newPrice = $_POST['new-price'];
-                    $newImage = $_POST['new-image'];
+                    $newImage = $_FILES['new-image']['name'];
+                        // Check for a post from the button and then include the file
                     if ( isset($_POST['upp-num'])){
                         include 'functioner/uppdate.php';
                     } 
                 ?>
             </div>
         </div>
+            <!-- Delete product file -->
         <div class="p-2 bd-highlight container">
             <h3>
-                <u>Ta bort produkt</u>
+                <u>Delete a product</u>
             </h3>
             <div class="container">
                 <form action="" class="d-flex flex-column mb-3" method="POST">
-                    <input type="number" placeholder="Skriv id för produkt" class="form-control" name="id">
+                    <input type="number" placeholder="Write id of product" class="form-control" name="id" required>
                     <button class="btn btn-danger" name="id-num">
-                        Ta bort produkten
+                        Delete
                     </button>
                 </form>
+                    <!-- Php code to get variable and include the delete file -->
                 <?php
                     $id = $_POST['id'];
+                        // Check for a post from the button and then include the file
                     if ( isset($_POST['id-num'])){
                         include 'functioner/delete.php';
                     } 

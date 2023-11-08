@@ -1,51 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Create BD</h1>
 <?php
 
+  // Check for the image
+if(isset($_FILES['img'])){
+    // Uppload the image to the img folder
+  move_uploaded_file($_FILES['img']['tmp_name'], "img/". $_FILES['img']['name']);
+    // include the config.php file to get connected to the Database
+  include 'functioner/config.php';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
+    // Create the sql variable, giving the values to the right colums in the products table
+      // Variables/values form the index page
+  $sql = "INSERT INTO Products (`name`,`description`,price,`image`)
+  VALUES ('$name', '$desc', '$price', '$img')";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    // Checking and echo out if the query worked
+  if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully" . "<br>";
+  } else {
+      //Else give the error
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+  $conn->close();
+}else{
+    //If the image can't be find echo that out
+    echo "Can't find a image";
 }
 
 
-// Create database
-$sql = "CREATE DATABASE IF NOT EXISTS crud_app";
-if ($conn->query($sql) === TRUE) {
-  echo "Database created successfully";
-} else {
-  echo "Error creating database: " . $conn->error;
-}
-
-
-// Create table
-// $sql = "CREATE TABLE IF NOT EXISTS Products (
-//     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-//     `name` VARCHAR(30) NOT NULL,
-//     `description` VARCHAR(30) NOT NULL,
-//     price VARCHAR(50),
-//     `image` VARCHAR(100)
-//     )";
-//     if ($conn->query($sql) === TRUE) {
-//       echo "Table Products created successfully";
-//     } else {
-//       echo "Error creating table: " . $conn->error;
-//     }
-
-$conn->close();
 ?> 
-</body>
-</html>
